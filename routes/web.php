@@ -34,4 +34,4 @@ Route::get('/datalog-availability', AvailabilityLog::class)->middleware('auth')-
 Route::get('/datalog-quality', QualityLog::class)->middleware('auth')->name('quality');
 Route::get('/dashboard/admin', DashboardIndex::class)->middleware('auth');
 
-Route::resource('/dashboard/admin', AdminUserController::class)->except('show');
+Route::resource('/dashboard/admin', AdminUserController::class)->except('show')->middleware('admin');

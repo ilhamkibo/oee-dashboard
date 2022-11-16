@@ -14,10 +14,7 @@ class AdminUserController extends Controller
      */
     public function index()
     {
-        if (!auth()->check() || auth()->user()->username !== 'ilhamprima'){
-            abort(403);
-        }
-
+        // $this->authorize('admin');
         return view('admin.index');
     }
 

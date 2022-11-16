@@ -53,9 +53,11 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item">
-                <a class="nav-link  {{ Request::is('dashboard/admin*') ? 'active' : '' }}" href="/dashboard/admin">User Authorization</a>
-            </li>
+            @can('admin')
+                <li class="nav-item">
+                    <a class="nav-link  {{ Request::is('dashboard/admin*') ? 'active' : '' }}" href="/dashboard/admin">User Authorization</a>
+                </li>
+            @endcan
         </ul>
         <ul class="navbar-nav ms-auto">
             <li class="nav-item">
