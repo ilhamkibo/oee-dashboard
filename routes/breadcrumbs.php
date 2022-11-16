@@ -30,3 +30,9 @@ Breadcrumbs::for('availability', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
     $trail->push('Datalog / Availability ', route('availability'));
 });
+
+// Home > Blog
+Breadcrumbs::for('admin', function (BreadcrumbTrail $trail) {
+    $trail->parent('home');
+    $trail->push('User Authorization', route('admin.index'));
+});

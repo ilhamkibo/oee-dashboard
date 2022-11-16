@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminUserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Livewire\AvailabilityLog;
@@ -32,3 +33,5 @@ Route::get('/datalog-performance', PerformanceLog::class)->middleware('auth')->n
 Route::get('/datalog-availability', AvailabilityLog::class)->middleware('auth')->name('availability');
 Route::get('/datalog-quality', QualityLog::class)->middleware('auth')->name('quality');
 Route::get('/dashboard/admin', DashboardIndex::class)->middleware('auth');
+
+Route::resource('/dashboard/admin', AdminUserController::class)->except('show');

@@ -31,6 +31,13 @@ class DatabaseSeeder extends Seeder
             'email' => 'ilham@gmail.com',
             'password' => bcrypt('admin123')
         ]);
+      
+        User::create([
+            'name' => 'Aceng Fikri',
+            'username' => 'cengaceng',
+            'email' => 'aceng@gmail.com',
+            'password' => bcrypt('admin123')
+        ]);
 
         Availability::create([
             'mc_id' => '1',
@@ -76,10 +83,10 @@ class DatabaseSeeder extends Seeder
         Availability::create([
             'mc_id' => '1',
             'name' => 'STOP',
-            'status' => '1',
+            'status' => '0',
             'message' => 'JEGLEK',
-            'created_at' => '2022-10-27 08:40:00',
-            'updated_at' => ''
+            'created_at' => '2022-11-16 08:40:00',
+            'updated_at' => '2022-11-16 13:40:00'
         ]);
 
         Availability::create([
@@ -126,10 +133,10 @@ class DatabaseSeeder extends Seeder
         Availability::create([
             'mc_id' => '2',
             'name' => 'RUN',
-            'status' => '1',
-            'message' => 'JEGLEK',
-            'created_at' => '2022-10-27 08:40:00',
-            'updated_at' => ''
+            'status' => '0',
+            'message' => 'LARIII',
+            'created_at' => '2022-11-16 08:40:00',
+            'updated_at' => '2022-11-16 13:40:00'
         ]);
     }
 }

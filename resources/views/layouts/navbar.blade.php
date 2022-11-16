@@ -34,9 +34,7 @@
             <li class="nav-item">
                 <a class="nav-link  {{ Request::is('dashboard') ? 'active' : '' }}" href="/dashboard">Dashboard OEE</a>
             </li>
-            {{-- <li class="nav-item">
-                <a class="nav-link  {{ Request::is('dashboard/datalog*') ? 'active' : '' }}" href="/dashboard/datalog">Details Data</a>
-            </li> --}}
+            
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle {{ Request::is('datalog-*') ? 'active' : '' }}" id="myBtn" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Details Data
@@ -54,6 +52,9 @@
                         <a class="dropdown-item" href="/datalog-availability"><i class="bi bi-layout-text-window-reverse"></i>Availability Data</a>
                     </li>
                 </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link  {{ Request::is('dashboard/admin*') ? 'active' : '' }}" href="/dashboard/admin">User Authorization</a>
             </li>
         </ul>
         <ul class="navbar-nav ms-auto">

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->bigInteger('value_a')->nullable();
             $table->bigInteger('value_b')->nullable();
             $table->bigInteger('value_c')->nullable();
+            $table->string('Model')->nullable();
             $table->dateTime('created_at');
         });
     }
