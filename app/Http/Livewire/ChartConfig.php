@@ -27,7 +27,7 @@ class ChartConfig extends Component
         // $qualities = Performance::join('qualities', 'performances.id', '=' , 'qualities.ModelId')->select('qualities.ModelId','qualities.Status','performances.model')->get();
         $qualities = Quality::select('ModelId','Status')->get();
         $availabilities = Availability::all();
-        $performances = Performance::all();
+        $performances = Performance::whereDate('timestamp', Carbon::today())->get();
         $targets = Target::all();
         $this->availabilities = $availabilities;
         // $this->qualities = $qualities;

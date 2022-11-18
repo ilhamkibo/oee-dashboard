@@ -1,4 +1,4 @@
-<div>
+<div class="mb-5">
     {{-- header --}}
     @push('css')
         <link rel="stylesheet" href="{{ asset('css/datalog.css') }}">
@@ -39,7 +39,7 @@
                             <strong>Performance</strong>
                         </div><br>
                             <span class="card-title text-muted">Target Quantity</span>
-                            <h5 class="font-weight-bold" id="tarPrf">100</h5>
+                            <h5 class="font-weight-bold" id="tarPrf">-</h5>
                             <span class="card-title text-muted">Actual Quantity</span>
                             <h5 class="font-weight-bold" id="actPrf">-</h5>
                             <span class="card-title text-muted">Persentase</span>

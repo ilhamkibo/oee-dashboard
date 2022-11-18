@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdminUserController extends Controller
 {
@@ -15,7 +16,11 @@ class AdminUserController extends Controller
     public function index()
     {
         // $this->authorize('admin');
-        return view('admin.index');
+        $users = User::all();
+        
+        return view('admin.index',[
+            'users' => $users
+        ]);
     }
 
     /**
@@ -25,7 +30,9 @@ class AdminUserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.create',[
+            'users' => User::all()
+        ]);
     }
 
     /**
@@ -36,7 +43,18 @@ class AdminUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'username' => ['required', 'min:3', 'max:255','unique:users'],
+            'email' => 'required|email:dns|unique:users',
+            'password' => 'required|min:5|max:255'
+        ]);
+
+        $validatedData['password'] = Hash::make($request->password);
+
+        User::create($validatedData);
+
+        return redirect('/dashboard/admin')->with('success','New user has been added!');
     }
 
     /**
@@ -56,9 +74,12 @@ class AdminUserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        //
+        $user = User::find($id);
+        return view('admin.edit',[
+            'user' => $user
+        ]);
     }
 
     /**
@@ -68,9 +89,26 @@ class AdminUserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+
+        $rules = [
+            'name' => 'required|max:255',
+            'is_admin' => 'required'
+        ];
+
+        if($request->username != $user->username){
+            $rules['username'] = 'required|unique:users';
+        }
+        if($request->email != $user->email){
+            $rules['email'] = 'required|unique:users';
+        }
+        $validatedData = $request->validate($rules);
+        // dd($validatedData);
+        User::where('id', $user-> id)
+            ->update($validatedData);
+        return redirect('/dashboard/admin')->with('success', 'User has been updated!');
     }
 
     /**
@@ -79,8 +117,9 @@ class AdminUserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        //
+        User::destroy($id);
+        return redirect('/dashboard/admin')->with('success', 'User has been deleted!');
     }
 }

@@ -116,10 +116,15 @@
                 } else {
                     var sub1 = new Date(ind.created_at);
                     var sub2 = new Date(ind.updated_at ? ind.updated_at : dateCard);
-                    stop = Math.floor(Math.abs(sub2 - sub1)/60000)
+                    stop = Math.floor(Math.abs(sub2 - sub1)/60000);
                 }
                 return {runtime: runtime == undefined ? 0 : runtime, stop: stop == undefined ? 0 : stop}
             });
+
+            const wktt = 5200000;
+            var a = Math.floor((wktt-(wktt%3600000))/3600000);
+            var b = Math.floor((wktt%3600000)/60000);
+            console.log(a+' hour '+b+' minutes')
 
             var runMesin1 = cardMesin1.map(val => val.runtime).reduce((acc, val) => acc + val);
             var stopMesin1 = cardMesin1.map(val => val.stop).reduce((acc, val) => acc + val);
@@ -213,7 +218,7 @@
             barPerData.datasets[0].data = [];
             const indexTargetPerfBar = dataFix4.map((val,ind) => {
                 const response = {x:val.timestamp, y:val.TARGET};
-                console.log(response);
+                // console.log(response);
                 barPerData.datasets[0].data.push(response);
             });
             barPer.update();

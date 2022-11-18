@@ -32,6 +32,6 @@ Route::get('/dashboard/datalog', DatalogIndex::class)->middleware('auth');
 Route::get('/datalog-performance', PerformanceLog::class)->middleware('auth')->name('performance');
 Route::get('/datalog-availability', AvailabilityLog::class)->middleware('auth')->name('availability');
 Route::get('/datalog-quality', QualityLog::class)->middleware('auth')->name('quality');
-Route::get('/dashboard/admin', DashboardIndex::class)->middleware('auth');
+// Route::get('/dashboard/admin', DashboardIndex::class)->middleware('auth');
 
 Route::resource('/dashboard/admin', AdminUserController::class)->except('show')->middleware('admin');

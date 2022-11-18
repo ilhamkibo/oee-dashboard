@@ -1,9 +1,9 @@
-<div>
+<div class="mb-5">
     <h6 class="mt-2">
         {{ Breadcrumbs::render('availability') }}
     </h6>
     <div class="container p-1">
-        <div class="card">
+        <div class="table-responsive card ">
             <div class="card-header">
                 All Data
             </div>
@@ -53,7 +53,8 @@
                         ],
                         dom: "<'row'<'col-lg-2'l><'col-lg-5'B><'col-lg-5'f>>" +
                         "<'row'<'col-md-12'tr>>" + 
-                        "<'row'<'col-md-5'i><'col-md-7'p>>"
+                        "<'row'<'col-md-5'i><'col-md-7'p>>",
+                        responsive: true
                     });
                 });
             </script>

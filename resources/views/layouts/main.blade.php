@@ -10,13 +10,9 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     {{-- Data Tables CSS --}}
     <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet">
-    {{-- <link rel="stylesheet" href="css/all.min.css"> --}}
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"> --}}
-
      {{-- Font Awesome  --}}
-     {{-- <script src="js/fontawesome.js"></script> --}}
-     <script src="{{ asset('js/fontawesome.js') }}"></script>
-
+     <link href="{{ asset('fontawesome/css/all.min.css') }}" rel="stylesheet">
+    
      <livewire:styles />
     @stack('css')
 </head>
@@ -48,6 +44,12 @@
     <script src="{{ asset('js/chartjs-plugin-zoom.js') }}"></script>
     {{-- Data Tables --}}
     <script src="{{ asset('js/datatables.min.js') }}"></script>
+    {{-- Feather Icon --}}
+    <script src="{{ asset('js/feathericon.js') }}"></script>
+
+    <script>
+        feather.replace()
+    </script>
     {{-- Data Tables --}}
     {{-- <script src="{{ asset('js/dataTablesBootstrap.js') }}"></script> --}}
     {{-- <script src="{{ asset('js/dataTablesJquery.js') }}"></script> --}}
@@ -61,11 +63,11 @@
 
     @stack('js')
 </body>
-<footer class="footer bg-white mt-2 ms-2">
-    <strong>Toho Technology Indonesia &copy; 2012-2022.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 1.0.0
-    </div>
-  </footer>
+    <footer class="footer bg-white ms-2 fixed-bottom">
+        <strong>Toho Technology Indonesia &copy; 2012-2022.</strong>
+        All rights reserved.
+        <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 1.0.0
+        </div>
+    </footer>
 </html>
