@@ -2,15 +2,26 @@
     <script>
 
         const ddate = new Date();
-        ddate.setHours(00);
-        ddate.setMinutes(00);
-        ddate.setSeconds(00);
-
+        ddate.setHours(ddate.getHours()-2);
         const ddate1 = new Date();
-        ddate1.setDate(ddate1.getDate() + 1);
-        ddate1.setHours(00);
-        ddate1.setMinutes(00);
-        ddate1.setSeconds(00);
+        ddate1.setHours(ddate1.getHours()+1);
+ 
+        const ddate2 = new Date();
+        ddate2.setHours(00);
+        ddate2.setMinutes(00);
+        ddate2.setSeconds(00);
+
+        const ddate3 = new Date();
+        ddate3.setDate(ddate3.getDate() + 1);
+        ddate3.setHours(00);
+        ddate3.setMinutes(00);
+        ddate3.setSeconds(00);
+       
+        const ddate4 = new Date();
+        ddate4.setDate(ddate4.getDate());
+        ddate4.setHours(00);
+        ddate4.setMinutes(00);
+        ddate4.setSeconds(00);
 
             
 
@@ -575,8 +586,8 @@
                     },
                     scales: {
                         x: {
-                            min: ddate,
-                            max: ddate1,
+                            min: ddate2,
+                            max: ddate3,
                             type: 'time',
                             time: {
                                 displayFormats: {
@@ -675,8 +686,8 @@
                     },
                     scales: {
                         x: {
-                            min: ddate,
-                            max: ddate1,
+                            min: ddate2,
+                            max: ddate3,
                             type: 'time',
                             time: {
                                 displayFormats: {

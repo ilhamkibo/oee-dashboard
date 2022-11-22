@@ -41,7 +41,24 @@
             </div>
             <div class="mb-3">
                 <label for="is_admin">Role</label> 
-                <input type="number" min="0" max="1" name="is_admin" class="form-control @error('is_admin') is-invalid @enderror" id="is_admin" placeholder="Role" required value="{{ old('is_admin',$user->is_admin) }}">
+                {{-- <input type="number" min="0" max="1" name="is_admin" class="form-control @error('is_admin') is-invalid @enderror" id="is_admin" placeholder="Role" required value="{{ old('is_admin',$user->is_admin) }}"> --}}
+                <select class="form-select @error('is_admin') is-invalid @enderror" name="is_admin" id="is_admin" required value="{{ old('is_admin', $user->is_admin) }}">
+                    {!! ($user->is_admin) ? 
+                        '<option value="1">admin</option>
+                        <option value="0">not-admin</option>' 
+                        :
+                        '<option value="0">not-admin</option>
+                        <option value="1">admin</option>'
+                    !!}
+                    
+                    {{-- @if ($user->is_admin)
+                        <option value="1">admin</option>
+                        <option value="0">not-admin</option>
+                    @else
+                        <option value="0">not-admin</option>
+                        <option value="1">admin</option>
+                    @endif --}}
+                </select>
                 @error('is_admin') 
                     <div class="invalid-feedback">
                         {{ $message }}

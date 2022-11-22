@@ -25,10 +25,10 @@ class ChartConfig extends Component
     public function changeData()
     {
         // $qualities = Performance::join('qualities', 'performances.id', '=' , 'qualities.ModelId')->select('qualities.ModelId','qualities.Status','performances.model')->get();
-        $qualities = Quality::select('ModelId','Status')->get();
+        $qualities = Quality::select('ModelId','Status')->whereDate('created_at', Carbon::today())->get();
         $availabilities = Availability::all();
         $performances = Performance::whereDate('timestamp', Carbon::today())->get();
-        $targets = Target::all();
+        $targets = Target::whereDate('timestamp', Carbon::today())->orderBy('id', 'DESC')->get();
         $this->availabilities = $availabilities;
         // $this->qualities = $qualities;
         $this->qualities = $qualities;

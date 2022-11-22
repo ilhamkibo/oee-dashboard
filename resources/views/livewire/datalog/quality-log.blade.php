@@ -35,8 +35,8 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $quality->Model }}</td>
                             <td>{{ $quality->Status }}</td>
-                            {{-- <td><img type="button" loading="lazy" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="popUp('{{ $quality->Image}}')" id="popUping" src="{{ asset('T:/Image/'.$quality->Model.'jpg')}}" alt="" style="max-height: 100px; max-width:100px;"></td> --}}
-                            <td><img src="{{ asset('img/'.$quality->Model.'.jpg') }}" alt="" style="max-height: 100px; max-width:100px;"></td>
+                            <td><img type="button" loading="lazy" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="popUp('{{ asset('img/'.$quality->Model.'.jpg') }}')" id="popUping" src="{{ asset('img/'.$quality->Model.'.jpg') }}" alt="" style="max-height: 100px; max-width:100px;"></td>
+                            {{-- <td><img src="{{ asset('img/'.$quality->Model.'.jpg') }}" alt="" style="max-height: 100px; max-width:100px;"></td> --}}
                             {{-- <td><img src="https://source.unsplash.com/1200x400?2" alt="" style="max-height: 100px; max-width:100px;"></td> --}}
                             <td>{{ $quality->value_a }}</td>
                             <td>{{ $quality->value_b }}</td>

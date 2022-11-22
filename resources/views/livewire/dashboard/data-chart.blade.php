@@ -87,49 +87,101 @@
             RunChart2.update();
 
             // Olah Data Untuk AVAILABILITY
-            const cardMesin1 = dataFix.filter(val => val.mc_id == 1).map(val => {
+            //Card Mesin 1
+            const dataFixFilter1 = dataFix.filter( val => val.mc_id == 1).map( val => {
+                const tgl = new Date(val.created_at)
+                tgl.setHours(00);
+                tgl.setMinutes(00);
+                tgl.setSeconds(00);
+                
+                return {tgl: tgl, duration: val.duration, created_at: val.created_at ,mc_id: val.mc_id, message:val.message , name:val.name , status:val.status , updated_at:val.updated_at }
+            })
 
+            const dataFixFilter2 = dataFix.filter( val => val.mc_id == 2).map( val => {
+                const tgl = new Date(val.created_at)
+                tgl.setHours(00);
+                tgl.setMinutes(00);
+                tgl.setSeconds(00);
+                
+                return {tgl: tgl, duration: val.duration ,created_at: val.created_at, mc_id: val.mc_id, message:val.message , name:val.name , status:val.status , updated_at:val.updated_at }
+            })
+
+            const cardMesin1 = dataFixFilter1.filter(val => String(val.tgl) == String(ddate4)).map( val => {
                 let runtime, stop;
                 if(val.name == "RUN") {
                     var sub1 = new Date(val.created_at);
                     var sub2 = new Date(val.updated_at ? val.updated_at : dateCard);
-                    runtime = Math.floor(Math.abs(sub2 - sub1)/60000); 
-                    // console.log(sub1)
-                    // console.log(sub2)
-                    // console.log(runtime)
-
+                    runtime = Math.abs(sub2 - sub1); 
                 } else {
                     var sub1 =  new Date(val.created_at);
                     var sub2 = new Date(val.updated_at ? val.updated_at : dateCard);
-                    stop = Math.floor(Math.abs(sub2 - sub1)/60000);
+                    stop = Math.abs(sub2 - sub1);
                 }
                 return { runtime: runtime == undefined ? 0 : runtime, stop: stop == undefined ? 0 : stop}
             });
 
-            // Card mesin 2
-            const cardMesin2 = dataFix.filter(ind => ind.mc_id == 2).map(ind => {
+            const cardMesin2 = dataFixFilter2.filter(val => String(val.tgl) == String(ddate4)).map( val => {
                 let runtime, stop;
-                if(ind.name == "RUN") {
-                    var sub1 =  new Date(ind.created_at);
-                    var sub2 =  new Date(ind.updated_at ? ind.updated_at : dateCard);
-                    runtime = Math.floor(Math.abs(sub2 - sub1)/60000);
+                if(val.name == "RUN") {
+                    var sub1 = new Date(val.created_at);
+                    var sub2 = new Date(val.updated_at ? val.updated_at : dateCard);
+                    runtime = Math.abs(sub2 - sub1); 
                 } else {
-                    var sub1 = new Date(ind.created_at);
-                    var sub2 = new Date(ind.updated_at ? ind.updated_at : dateCard);
-                    stop = Math.floor(Math.abs(sub2 - sub1)/60000);
+                    var sub1 =  new Date(val.created_at);
+                    var sub2 = new Date(val.updated_at ? val.updated_at : dateCard);
+                    stop = Math.abs(sub2 - sub1);
                 }
-                return {runtime: runtime == undefined ? 0 : runtime, stop: stop == undefined ? 0 : stop}
+                return { runtime: runtime == undefined ? 0 : runtime, stop: stop == undefined ? 0 : stop}
             });
 
-            const wktt = 5200000;
-            var a = Math.floor((wktt-(wktt%3600000))/3600000);
-            var b = Math.floor((wktt%3600000)/60000);
-            console.log(a+' hour '+b+' minutes')
+            // const cardMesin1 = dataFix.filter(val => val.mc_id == 1).map(val => {
+            //     let runtime, stop;
+            //     if(val.name == "RUN") {
+            //         var sub1 = new Date(val.created_at);
+            //         var sub2 = new Date(val.updated_at ? val.updated_at : dateCard);
+            //         runtime = Math.abs(sub2 - sub1); 
+            //     } else {
+            //         var sub1 =  new Date(val.created_at);
+            //         var sub2 = new Date(val.updated_at ? val.updated_at : dateCard);
+            //         stop = Math.abs(sub2 - sub1);
+            //     }
+            //     return { runtime: runtime == undefined ? 0 : runtime, stop: stop == undefined ? 0 : stop}
+            // });
 
-            var runMesin1 = cardMesin1.map(val => val.runtime).reduce((acc, val) => acc + val);
-            var stopMesin1 = cardMesin1.map(val => val.stop).reduce((acc, val) => acc + val);
-            var runMesin2 = cardMesin2.map(val => val.runtime).reduce((acc, val) => acc + val);
-            var stopMesin2 = cardMesin2.map(val => val.stop).reduce((acc, val) => acc + val);
+            //Card Mesin 2
+            // const cardMesin2 = dataFix.filter(ind => ind.mc_id == 2).map(ind => {
+            //     let runtime, stop;
+            //     if(ind.name == "RUN") {
+            //         var sub1 =  new Date(ind.created_at);
+            //         var sub2 =  new Date(ind.updated_at ? ind.updated_at : dateCard);
+            //         runtime = Math.abs(sub2 - sub1);
+            //     } else {
+            //         var sub1 = new Date(ind.created_at);
+            //         var sub2 = new Date(ind.updated_at ? ind.updated_at : dateCard);
+            //         stop = Math.abs(sub2 - sub1);
+            //     }
+            //     return {runtime: runtime == undefined ? 0 : runtime, stop: stop == undefined ? 0 : stop}
+            // });
+            const testHitungDuration1 = dataFixFilter1.filter(val => String(val.tgl) == String(ddate4)).map(val => val.duration).reduce((acc, val) => Number(acc)+Number(val));
+            const testHitungDuration2 = dataFixFilter2.filter(val => String(val.tgl) == String(ddate4)).map(val => val.duration).reduce((acc, val) => Number(acc)+Number(val));
+            console.log(testHitungDuration1+' ini mesin 1')
+            console.log(testHitungDuration2+' ini mesin 2')
+            var runMesin1 = cardMesin1.map(val => val.runtime).reduce((acc, val) => acc + val)/60000;
+            var runHoursMesin1 = Math.floor(runMesin1/60);
+            var runMinutesMesin1 = Math.round(runMesin1%60);
+            
+            var stopMesin1 = cardMesin1.map(val => val.stop).reduce((acc, val) => acc + val)/60000;
+            var stopHoursMesin1 = Math.floor(stopMesin1/60);
+            var stopMinutesMesin1 = Math.round(stopMesin1%60);
+            
+            var runMesin2 = cardMesin2.map(val => val.runtime).reduce((acc, val) => acc + val)/60000;
+            var runHoursMesin2 = Math.floor(runMesin2/60);
+            var runMinutesMesin2 = Math.round(runMesin2%60);
+            
+            var stopMesin2 = cardMesin2.map(val => val.stop).reduce((acc, val) => acc + val)/60000;
+            var stopHoursMesin2 = Math.floor(stopMesin2/60);
+            var stopMinutesMesin2 = Math.round(stopMesin2%60);
+            
             var totRun = runMesin1+runMesin2;
             var totStop = stopMesin1+stopMesin2;
 
@@ -138,9 +190,12 @@
             //MACHINE 1
             if (x == 1) {
                 //INSERT DATA TO AVAILABILITY CARD
-                document.getElementById('totAvl').innerText = cardMesin1.map(val => val.runtime + val.stop).reduce((acc, val) => acc + val) + ' mins';
-                document.getElementById('actAvl').innerHTML = runMesin1 + ' mins';
-                document.getElementById('donAvl').innerHTML = stopMesin1 + ' mins';
+                document.getElementById('totAvl').innerText = Math.floor((runMesin1+stopMesin1)/60) +'H:'+Math.floor((runMesin1+stopMesin1)%60)+'M';
+                document.getElementById('actAvl').innerHTML = runHoursMesin1+'H:'+runMinutesMesin1+'M';
+                document.getElementById('donAvl').innerHTML = stopHoursMesin1+'H:'+stopMinutesMesin1+'M';
+                document.getElementById('totAvlAvg').innerText = 'Total Opt Time Machine 1';
+                document.getElementById('actAvlAvg').innerText = 'Runtime Machine 1';
+                document.getElementById('donAvlAvg').innerText = 'Downtime Machine 1';
                 //INSERT DATA TO AVAILABILITY DONUT CHART
                 donAvlData.datasets[0].data[0] = runMesin1;
                 donAvlData.datasets[0].data[1] = stopMesin1;
@@ -153,9 +208,12 @@
             //MACHINE 2
             } else if (x == 2) {
                 //INSERT DATA TO AVAILABILITY CARD
-                document.getElementById('totAvl').innerText = cardMesin2.map(val => val.runtime + val.stop).reduce((acc, val) => acc + val)+ ' mins';
-                document.getElementById('actAvl').innerHTML = runMesin2 + ' mins';
-                document.getElementById('donAvl').innerHTML = stopMesin2 + ' mins';
+                document.getElementById('totAvl').innerText = Math.floor((runMesin2+stopMesin2)/60) +'H:'+Math.floor((runMesin2+stopMesin2)%60)+'M';
+                document.getElementById('actAvl').innerHTML = runHoursMesin2+'H:'+runMinutesMesin2+'M';
+                document.getElementById('donAvl').innerHTML = stopHoursMesin2+'H:'+stopMinutesMesin2+'M';
+                document.getElementById('totAvlAvg').innerText = 'Total Opt Time Machine 2';
+                document.getElementById('actAvlAvg').innerText = 'Runtime Machine 2';
+                document.getElementById('donAvlAvg').innerText = 'Downtime Machine 2';
                 //INSERT DATA TO AVAILABILITY DONUT CHART
                 donAvlData.datasets[0].data[0] = runMesin2;
                 donAvlData.datasets[0].data[1] = stopMesin2;
@@ -168,9 +226,12 @@
             //MACHINE 1 + MACHINE 2
             } else {
                 //INSERT DATA TO AVAILABILITY CARD
-                document.getElementById('totAvl').innerText = [...cardMesin1, ...cardMesin2].map(val => val.runtime + val.stop).reduce((acc, val) => acc + val) + ' mins';
-                document.getElementById('actAvl').innerHTML = totRun + ' mins';
-                document.getElementById('donAvl').innerHTML = totStop + ' mins';
+                document.getElementById('totAvl').innerText = Math.floor(((totRun +totStop)/2)/60)+'H:'+Math.round(((totRun +totStop)/2)%60)+ 'M';
+                document.getElementById('actAvl').innerHTML = Math.floor((totRun/2)/60) + 'H:' + Math.round((totRun/2)%60)+'M';
+                document.getElementById('donAvl').innerHTML = Math.floor((totStop/2)/60) + 'H:' + Math.round((totStop/2)%60)+'M';
+                document.getElementById('totAvlAvg').innerText = 'Average Total Opt Time';
+                document.getElementById('actAvlAvg').innerText = 'Average Runtime';
+                document.getElementById('donAvlAvg').innerText = 'Average Downtime';
                 //INSERT DATA TO AVAILABILITY DONUT CHART
                 donAvlData.datasets[0].data[0] = totRun;
                 donAvlData.datasets[0].data[1] = totStop;
@@ -200,12 +261,12 @@
             barQty.update();
 
             //INSERT DATA TO PERFORMANCE CARD
+            document.getElementById('tarPrf').innerText = dataFix4[0].TARGET;
             document.getElementById('actPrf').innerText = dataFix3.length;
-            document.getElementById('tarPrf').innerText = dataFix4[dataFix4.length-1].TARGET;
-            document.getElementById('perPrf').innerHTML = Number(dataFix3.length/dataFix4[dataFix4.length-1].TARGET*100).toFixed(2) + '%';
+            document.getElementById('perPrf').innerHTML = Number(dataFix3.length/dataFix4[0].TARGET*100).toFixed(2) + '%';
             //INSERT DATA TO PERFORMANCE DONUT CHART
             donPerData.datasets[0].data[0] = dataFix3.length;
-            donPerData.datasets[0].data[1] = dataFix4[dataFix4.length-1].TARGET-dataFix3.length;
+            donPerData.datasets[0].data[1] = dataFix4[0].TARGET-dataFix3.length;
             DonutPer.update();
             
             //INSERT DATA TO PERFORMANCE BAR CHART (ACTUAL)
