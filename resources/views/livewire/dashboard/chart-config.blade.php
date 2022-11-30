@@ -1,29 +1,21 @@
 <div>
     <script>
 
-        const ddate = new Date();
-        ddate.setHours(ddate.getHours()-2);
-        const ddate1 = new Date();
-        ddate1.setHours(ddate1.getHours()+1);
+        const setTime2HourBefore = new Date();
+        setTime2HourBefore.setHours(setTime2HourBefore.getHours()-2);
+        const setTime1HourAfter = new Date();
+        setTime1HourAfter.setHours(setTime1HourAfter.getHours()+1);
  
-        const ddate2 = new Date();
-        ddate2.setHours(00);
-        ddate2.setMinutes(00);
-        ddate2.setSeconds(00);
+        const setDateTimeToday = new Date();
+        setDateTimeToday.setHours(00);
+        setDateTimeToday.setMinutes(00);
+        setDateTimeToday.setSeconds(00);
 
-        const ddate3 = new Date();
-        ddate3.setDate(ddate3.getDate() + 1);
-        ddate3.setHours(00);
-        ddate3.setMinutes(00);
-        ddate3.setSeconds(00);
-       
-        const ddate4 = new Date();
-        ddate4.setDate(ddate4.getDate());
-        ddate4.setHours(00);
-        ddate4.setMinutes(00);
-        ddate4.setSeconds(00);
-
-            
+        const setDateTimeTomorrow = new Date();
+        setDateTimeTomorrow.setDate(setDateTimeTomorrow.getDate() + 1);
+        setDateTimeTomorrow.setHours(00);
+        setDateTimeTomorrow.setMinutes(00);
+        setDateTimeTomorrow.setSeconds(00);
 
         setInterval(() => Livewire.emit('ubahData'), 1000);
 
@@ -46,7 +38,7 @@
                 datasets: [{
                 label: 'My First dataset',
                 backgroundColor: ['#60A9A6', '#D45D79'],
-                data: [30, 45],
+                data: [0, 0],
                 }]
             };
 
@@ -132,7 +124,7 @@
                 datasets: [{
                 label: 'My First dataset',
                 backgroundColor: ['#60A9A6', '#D45D79'],
-                data: [5, 10],
+                data: [0, 1],
                 }]
             };
 
@@ -195,10 +187,10 @@
                 datasets: [{
                 label: 'My First dataset',
                 backgroundColor: ['#60A9A6', '#D45D79'],
-                data: [4, 10],
+                data: [0, 0],
                 }]
             };
-
+            
             const doughnutText2 = {
                 id: 'doughnutText2',
                 afterDatasetsDraw(chart, args, pluginOptions) {
@@ -256,7 +248,7 @@
                 datasets: [{
                 label: 'My First dataset',
                 backgroundColor: ['#60A9A6', '#D45D79'],
-                data: [8, 10],
+                data: [0, 1],
                 }]
             };
 
@@ -375,10 +367,8 @@
                     scales: {
                             x: {
                                 display: true,
-                                min: ddate,
-                                max: ddate1,
-                                // min: d,
-                                // max: d1,
+                                min: setTime2HourBefore,
+                                max: setTime1HourAfter,
                                 type: 'time',
                                 time: {
                                     unit: "hour",
@@ -414,7 +404,7 @@
                         "#78B0A0",
                         "#FF8080"
                     ],
-                    data: [20,5,15]
+                    data: [0,0,0]
                 }]
             };
 
@@ -472,7 +462,7 @@
                             "#78B0A0",
                             "#FF8080"
                         ],
-                    data: [25,15, 10],
+                    data: [0, 0, 0],
                 }]
             };
 
@@ -586,8 +576,8 @@
                     },
                     scales: {
                         x: {
-                            min: ddate2,
-                            max: ddate3,
+                            min: setDateTimeToday,
+                            max: setDateTimeTomorrow,
                             type: 'time',
                             time: {
                                 displayFormats: {
@@ -655,7 +645,7 @@
                 options: {
                     animation: false,
                     indexAxis: "y",
-                    barPercentage: 0.5,
+                    barPercentage: 0.8,
                     maintainAspectRatio: false,
                     plugins: {
                         tooltip: {
@@ -686,8 +676,8 @@
                     },
                     scales: {
                         x: {
-                            min: ddate2,
-                            max: ddate3,
+                            min: setDateTimeToday,
+                            max: setDateTimeTomorrow,
                             type: 'time',
                             time: {
                                 displayFormats: {

@@ -27,13 +27,13 @@
                     <strong>Key Performance Indicator</strong>
                 </div>
                 <div class="card-body mt-4">
-                    <canvas id="myChart" style="height: 373px;"></canvas>
+                    <canvas id="myChart" style="height: 395px;"></canvas>
                 </div>
             </div>
         </div>
-        <div class="col-lg-6 mb-1">
+        <div class="col-lg-6 px-1 mb-1">
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-4 p-0 ">
                     <div class="card text-center">
                         <div class="card-header" style="background-color: #72D6C9;">
                             <div class="row">
@@ -45,7 +45,7 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-6 pt-2 text-start">
-                                    <strong>Availability</strong> 
+                                    <strong>Available</strong> 
                                 </div>
                             </div>
                         </div><br>
@@ -57,7 +57,7 @@
                             <h5 class="font-weight-bold" id="donAvl">-H:-M</h5>
                     </div>
                 </div>
-                <div class="col-sm-4 mb-1">
+                <div class="col-sm-4 px-1 mb-1">
                     <div class="card text-center">
                         <div class="card-header" style="background-color: #DF7599;">
                             <strong>Performance</strong>
@@ -70,7 +70,7 @@
                             <h5 class="font-weight-bold" id="perPrf">-</h5>
                     </div>
                 </div>
-                <div class="col-sm-4 mb-1">
+                <div class="col-sm-4 p-0 mb-1">
                     <div class="card text-center">
                         <div class="card-header" style="background-color: #FFC785;">
                             <strong>Quality</strong> 
@@ -85,17 +85,17 @@
                 </div>
             </div>
             <div class="row mt-1">
-                <div class="col-sm-4">
+                <div class="col-sm-4 p-0">
                     <div class="card">
                         <canvas id="DonutAvl" style="height:215px"></canvas>
                     </div>
                 </div>
-                <div class="col-sm-4 mb-1">
+                <div class="col-sm-4 px-1 mb-1">
                     <div class="card">
                         <canvas id="DonutPer" style="height:215px"></canvas>
                     </div>
                 </div>
-                <div class="col-sm-4 mb-1 mx-0">
+                <div class="col-sm-4 p-0 mb-1">
                     <div class="card">
                         <canvas id="DonutQty" style="height:215px"></canvas>
                     </div>
@@ -104,22 +104,18 @@
         </div>
         <div class="col-lg-3">
             <div class="row">
-                <div class="row">
-                    <div class="col">
-                        <div class="card" style="height: 151px;">
-                            <canvas id="barAvl"></canvas>
-                        </div>
+                <div class="col mt-1">
+                    <div class="card" style="height: 160px;">
+                        <canvas id="barAvl"></canvas>
                     </div>
                 </div>
-                <div class="col mt-2">
-                    <div class="card" style="height: 151px;">
+                <div class="col mt-1">
+                    <div class="card" style="height: 160px;">
                         <canvas id="barPer"></canvas>
                     </div>
                 </div>
-            </div>
-            <div class="row mt-2">
-                <div class="col">
-                    <div class="card" style="height: 151px;">
+                <div class="col mt-1">
+                    <div class="card" style="height: 160px;">
                         <canvas id="barQty"></canvas>
                     </div>
                 </div>

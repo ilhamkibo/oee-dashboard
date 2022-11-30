@@ -6,44 +6,41 @@
             dformat = [forUpdate.getFullYear(),forUpdate.getMonth()+1, forUpdate.getDate()].join('-')+' '+[forUpdate.getHours(), forUpdate.getMinutes(),forUpdate.getSeconds()].join(':');
             dateCard = new Date(dformat);
             dateCard.setHours(dateCard.getHours()+7);
-            var dataFix = event.availabilities;
-            var dataFix2 = event.qualities;
-            var dataFix3 = event.performances;
-            var dataFix4 = event.targets;
-            // console.log(event)
-
+            var dataAvailabilities = event.availabilities;
+            var dataQualities = event.qualities;
+            var dataPerformances = event.performances;
+            var dataTargets = event.targets;
             
             // RUNNING MACHINE
             const backgroundColor = ['#75B79E','#FF8080'];
 
             // FOR RUNNING MACHINE HORIZONTAL BAR CHART 1
             runBarData.datasets.length = 0;
-            const barMesin1 = dataFix.filter(ind => ind.mc_id == 1).map(ind => {
-                const dibuat = new Date(ind.created_at)
-                dibuat.setHours(dibuat.getHours()-7);
-                const dibarui = new Date(ind.updated_at)
-                dibarui.setHours(dibarui.getHours()-7);
-                // console.log(dibarui);
-                // console.log(dibuat);
+            const runningBarMesin1 = dataAvailabilities.filter(ind => ind.mc_id == 1).map(ind => {
+                //Change Time to locale
+                const createTime = new Date(ind.created_at)
+                createTime.setHours(createTime.getHours()-7);
+                const updatedTime = new Date(ind.updated_at)
+                updatedTime.setHours(updatedTime.getHours()-7);
+                //Push Data Run Mesin 1
                 if (ind.name == 'RUN') {
-                    // console.log(ind.status)
+                    //Push Data Based on Status 0 (Stop Progress) and 1 (Still Progress)
                     if (ind.status == 0) {
-                        const response =   {data:  [[dibuat, dibarui]], label: ind.message, backgroundColor: backgroundColor[ind.status]}
-                    // return response
-                    runBarData.datasets.push(response)
+                        const response =   {data:  [[createTime, updatedTime]], label: ind.message, backgroundColor: backgroundColor[ind.status]}
+                        runBarData.datasets.push(response)
                     } else {
-                    const response =   {data:  [[dibuat, dformat]], label: ind.message,  backgroundColor: backgroundColor[ind.status-1]}
-                    runBarData.datasets.push(response)
+                        const response =   {data:  [[createTime, dformat]], label: ind.message,  backgroundColor: backgroundColor[ind.status-1]}
+                        runBarData.datasets.push(response)
                     }
+                //Push Data Stop Mesin 1
                 } else {
+                    //Push Data Based on Status 0 (Stop Progress) and 1 (Still Progress)
                     if (ind.status == 0) {
-                    const response =   {data:  [[dibuat, dibarui]], label: ind.message,backgroundColor: backgroundColor[1]}
-
-                    // return response
-                    runBarData.datasets.push(response)
+                        const response =   {data:  [[createTime, updatedTime]], label: ind.message,backgroundColor: backgroundColor[1]}
+                        runBarData.datasets.push(response)
                     } else {
-                    const response =   {data:  [[dibuat, dformat]], label: ind.message,backgroundColor: backgroundColor[ind.status]}
-                    runBarData.datasets.push(response)
+                        const response =   {data:  [[createTime, dformat]], label: ind.message,backgroundColor: backgroundColor[ind.status]}
+                        runBarData.datasets.push(response)
                     }  
                 }
             });
@@ -52,34 +49,31 @@
 
             // FOR RUNNING MACHINE HORIZONTAL BAR CHART 2
             runBarData2.datasets.length = 0;
-            const barMesin2 = dataFix.filter(ind => ind.mc_id == 2).map(ind => {
-                const dibuat = new Date(ind.created_at)
-                dibuat.setHours(dibuat.getHours()-7);
-                
-                const dibarui = new Date(ind.updated_at)
-                dibarui.setHours(dibarui.getHours()-7);
-                
+            const barMesin2 = dataAvailabilities.filter(ind => ind.mc_id == 2).map(ind => {
+                //Change Time to locale
+                const createTime = new Date(ind.created_at)
+                createTime.setHours(createTime.getHours()-7);  
+                const updatedTime = new Date(ind.updated_at)
+                updatedTime.setHours(updatedTime.getHours()-7);
+
+                //Push Data Run Mesin 2
                 if (ind.name == 'RUN') {
-                    // console.log(ind.status)
+                    //Push Data Based on Status 0 (Stop Progress) and 1 (Still Progress)
                     if (ind.status == 0) {
-                    // console.log(dibarui);
-                    // console.log(dibuat);
-                    const response =   {data:  [[dibuat, dibarui]], label: ind.message, backgroundColor: backgroundColor[0]}
-                    // return response
+                    const response =   {data:  [[createTime, updatedTime]], label: ind.message, backgroundColor: backgroundColor[0]}
                     runBarData2.datasets.push(response)
-                    // console.log(runBarData2.datasets)
                     } else {
-                    const response =   {data:  [[dibuat, dformat]], label: ind.message,  backgroundColor: backgroundColor[0]}
+                    const response =   {data:  [[createTime, dformat]], label: ind.message,  backgroundColor: backgroundColor[0]}
                     runBarData2.datasets.push(response)
                     }
+                //Push Data Stop Mesin 2
                 } else {
+                    //Push Data Based on Status 0 (Stop Progress) and 1 (Still Progress)
                     if (ind.status == 0) {
-                    const response =   {data:  [[dibuat, dibarui]], label: ind.message,backgroundColor: backgroundColor[1]}
-
-                    // return response
+                    const response =   {data:  [[createTime, updatedTime]], label: ind.message,backgroundColor: backgroundColor[1]}
                     runBarData2.datasets.push(response)
                     } else {
-                    const response =   {data:  [[dibuat, dformat]], label: ind.message,backgroundColor: backgroundColor[1]}
+                    const response =   {data:  [[createTime, dformat]], label: ind.message,backgroundColor: backgroundColor[1]}
                     runBarData2.datasets.push(response)
                     }  
                 }
@@ -87,26 +81,26 @@
             RunChart2.update();
 
             // Olah Data Untuk AVAILABILITY
-            //Card Mesin 1
-            const dataFixFilter1 = dataFix.filter( val => val.mc_id == 1).map( val => {
+            //Card Mesin 1 change date type
+            const dataFixFilter1 = dataAvailabilities.filter( val => val.mc_id == 1).map( val => {
                 const tgl = new Date(val.created_at)
                 tgl.setHours(00);
                 tgl.setMinutes(00);
                 tgl.setSeconds(00);
-                
                 return {tgl: tgl, duration: val.duration, created_at: val.created_at ,mc_id: val.mc_id, message:val.message , name:val.name , status:val.status , updated_at:val.updated_at }
-            })
+            });
 
-            const dataFixFilter2 = dataFix.filter( val => val.mc_id == 2).map( val => {
+            //Card Mesin 2 change date type
+            const dataFixFilter2 = dataAvailabilities.filter( val => val.mc_id == 2).map( val => {
                 const tgl = new Date(val.created_at)
                 tgl.setHours(00);
                 tgl.setMinutes(00);
                 tgl.setSeconds(00);
-                
                 return {tgl: tgl, duration: val.duration ,created_at: val.created_at, mc_id: val.mc_id, message:val.message , name:val.name , status:val.status , updated_at:val.updated_at }
-            })
+            });
 
-            const cardMesin1 = dataFixFilter1.filter(val => String(val.tgl) == String(ddate4)).map( val => {
+            //Card Mesin 1 date filtering
+            const cardMesin1 = dataFixFilter1.filter(val => String(val.tgl) == String(setDateTimeToday)).map( val => {
                 let runtime, stop;
                 if(val.name == "RUN") {
                     var sub1 = new Date(val.created_at);
@@ -120,7 +114,8 @@
                 return { runtime: runtime == undefined ? 0 : runtime, stop: stop == undefined ? 0 : stop}
             });
 
-            const cardMesin2 = dataFixFilter2.filter(val => String(val.tgl) == String(ddate4)).map( val => {
+            //Card Mesin 1 date filtering
+            const cardMesin2 = dataFixFilter2.filter(val => String(val.tgl) == String(setDateTimeToday)).map( val => {
                 let runtime, stop;
                 if(val.name == "RUN") {
                     var sub1 = new Date(val.created_at);
@@ -134,38 +129,7 @@
                 return { runtime: runtime == undefined ? 0 : runtime, stop: stop == undefined ? 0 : stop}
             });
 
-            // const cardMesin1 = dataFix.filter(val => val.mc_id == 1).map(val => {
-            //     let runtime, stop;
-            //     if(val.name == "RUN") {
-            //         var sub1 = new Date(val.created_at);
-            //         var sub2 = new Date(val.updated_at ? val.updated_at : dateCard);
-            //         runtime = Math.abs(sub2 - sub1); 
-            //     } else {
-            //         var sub1 =  new Date(val.created_at);
-            //         var sub2 = new Date(val.updated_at ? val.updated_at : dateCard);
-            //         stop = Math.abs(sub2 - sub1);
-            //     }
-            //     return { runtime: runtime == undefined ? 0 : runtime, stop: stop == undefined ? 0 : stop}
-            // });
-
-            //Card Mesin 2
-            // const cardMesin2 = dataFix.filter(ind => ind.mc_id == 2).map(ind => {
-            //     let runtime, stop;
-            //     if(ind.name == "RUN") {
-            //         var sub1 =  new Date(ind.created_at);
-            //         var sub2 =  new Date(ind.updated_at ? ind.updated_at : dateCard);
-            //         runtime = Math.abs(sub2 - sub1);
-            //     } else {
-            //         var sub1 = new Date(ind.created_at);
-            //         var sub2 = new Date(ind.updated_at ? ind.updated_at : dateCard);
-            //         stop = Math.abs(sub2 - sub1);
-            //     }
-            //     return {runtime: runtime == undefined ? 0 : runtime, stop: stop == undefined ? 0 : stop}
-            // });
-            const testHitungDuration1 = dataFixFilter1.filter(val => String(val.tgl) == String(ddate4)).map(val => val.duration).reduce((acc, val) => Number(acc)+Number(val));
-            const testHitungDuration2 = dataFixFilter2.filter(val => String(val.tgl) == String(ddate4)).map(val => val.duration).reduce((acc, val) => Number(acc)+Number(val));
-            console.log(testHitungDuration1+' ini mesin 1')
-            console.log(testHitungDuration2+' ini mesin 2')
+            //Card Mesin 1 calculating to hour and minute  
             var runMesin1 = cardMesin1.map(val => val.runtime).reduce((acc, val) => acc + val)/60000;
             var runHoursMesin1 = Math.floor(runMesin1/60);
             var runMinutesMesin1 = Math.round(runMesin1%60);
@@ -173,7 +137,8 @@
             var stopMesin1 = cardMesin1.map(val => val.stop).reduce((acc, val) => acc + val)/60000;
             var stopHoursMesin1 = Math.floor(stopMesin1/60);
             var stopMinutesMesin1 = Math.round(stopMesin1%60);
-            
+
+            //Card Mesin 2 calculating to hour and minute  
             var runMesin2 = cardMesin2.map(val => val.runtime).reduce((acc, val) => acc + val)/60000;
             var runHoursMesin2 = Math.floor(runMesin2/60);
             var runMinutesMesin2 = Math.round(runMesin2%60);
@@ -244,10 +209,10 @@
             }
 
             // INSERT DATA TO QUALITY
-            const donutQualityDataOk = dataFix2.filter(val => val.Status == 'OK');
-            const donutQualityDataNg = dataFix2.filter(val => val.Status == 'NG');
+            const donutQualityDataOk = dataQualities.filter(val => val.Status == 'OK');
+            const donutQualityDataNg = dataQualities.filter(val => val.Status == 'NG');
             //INSERT DATA TO QUALITY CARD
-            document.getElementById('totQty').innerText = dataFix2.length;
+            document.getElementById('totQty').innerText = dataQualities.length;
             document.getElementById('okQty').innerText = donutQualityDataOk.length;
             document.getElementById('ngQty').innerText = donutQualityDataNg.length;
             //INSERT DATA TO QUALITY DONUT CHART
@@ -255,29 +220,33 @@
             donQtyData.datasets[0].data[1] = donutQualityDataNg.length;
             DonutQty.update();
             //INSERT DATA TO QUALITY BAR CHART
-            barQtyData.datasets[0].data[0] = dataFix2.length;
+            barQtyData.datasets[0].data[0] = dataQualities.length;
             barQtyData.datasets[0].data[1] = donutQualityDataOk.length;
             barQtyData.datasets[0].data[2] = donutQualityDataNg.length;
             barQty.update();
 
             //INSERT DATA TO PERFORMANCE CARD
-            document.getElementById('tarPrf').innerText = dataFix4[0].TARGET;
-            document.getElementById('actPrf').innerText = dataFix3.length;
-            document.getElementById('perPrf').innerHTML = Number(dataFix3.length/dataFix4[0].TARGET*100).toFixed(2) + '%';
+            document.getElementById('tarPrf').innerText = dataTargets[0].TARGET;
+            document.getElementById('actPrf').innerText = dataPerformances.length;
+            document.getElementById('perPrf').innerHTML = Number(dataPerformances.length/dataTargets[0].TARGET*100).toFixed(2) + '%';
             //INSERT DATA TO PERFORMANCE DONUT CHART
-            donPerData.datasets[0].data[0] = dataFix3.length;
-            donPerData.datasets[0].data[1] = dataFix4[0].TARGET-dataFix3.length;
+            if (dataPerformances.length < dataTargets[0].TARGET-dataPerformances.length) {
+                donPerData.datasets[0].data[1] = dataTargets[0].TARGET-dataPerformances.length; //target
+            } else {
+                donPerData.datasets[0].data[1] = 0; //target
+            }
+            donPerData.datasets[0].data[0] = dataPerformances.length; //actual
+            // donPerData.datasets[0].data[1] = dataTargets[0].TARGET-dataPerformances.length; //target
             DonutPer.update();
-            
             //INSERT DATA TO PERFORMANCE BAR CHART (ACTUAL)
             barPerData.datasets[1].data = [];
-            const indexActualPerfBar = dataFix3.map((val,ind) => {
+            const indexActualPerfBar = dataPerformances.map((val,ind) => {
                 const response = {x:val.timestamp, y:ind+1};
                 barPerData.datasets[1].data.push(response);
             });
             //INSERT DATA TO PERFORMANCE BAR CHART (TARGET)
             barPerData.datasets[0].data = [];
-            const indexTargetPerfBar = dataFix4.map((val,ind) => {
+            const indexTargetPerfBar = dataTargets.map((val,ind) => {
                 const response = {x:val.timestamp, y:val.TARGET};
                 // console.log(response);
                 barPerData.datasets[0].data.push(response);
@@ -289,13 +258,11 @@
             // console.log(oeeDonutChart)
             OEEData.datasets[0].data[0] = oeeDonutChart; 
             if (OEEData.datasets[0].data[0] < 100) {
-                OEEData.datasets[0].data[1] = 100 -  oeeDonutChart;
+                OEEData.datasets[0].data[1] = 100 - oeeDonutChart;
             } else {
                 OEEData.datasets[0].data[1] = 0;
             }
             myChart.update();
         });
-
-
     </script>
 </div>
