@@ -230,13 +230,13 @@
             document.getElementById('actPrf').innerText = dataPerformances.length;
             document.getElementById('perPrf').innerHTML = Number(dataPerformances.length/dataTargets[0].TARGET*100).toFixed(2) + '%';
             //INSERT DATA TO PERFORMANCE DONUT CHART
-            if (dataPerformances.length < dataTargets[0].TARGET-dataPerformances.length) {
+            if (dataPerformances.length < dataTargets[0].TARGET) {
                 donPerData.datasets[0].data[1] = dataTargets[0].TARGET-dataPerformances.length; //target
             } else {
-                donPerData.datasets[0].data[1] = 0; //target
-            }
-            donPerData.datasets[0].data[0] = dataPerformances.length; //actual
+                    donPerData.datasets[0].data[1] = 0; //target
+                }
             // donPerData.datasets[0].data[1] = dataTargets[0].TARGET-dataPerformances.length; //target
+            donPerData.datasets[0].data[0] = dataPerformances.length; //actual
             DonutPer.update();
             //INSERT DATA TO PERFORMANCE BAR CHART (ACTUAL)
             barPerData.datasets[1].data = [];

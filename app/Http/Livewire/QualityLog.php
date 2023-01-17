@@ -30,6 +30,6 @@ class QualityLog extends Component
 
         return view('livewire.datalog.quality-log',[
             'qualities' => $qualities
-        ])->extends('layouts.main')->section('content');;
+        ])->extends('layouts.main')->section('content');
     }
 }
